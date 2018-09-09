@@ -6,6 +6,12 @@
 </head>
 <body>
 <h1>DB basic Entity-Repository</h1>
+<!-- th:object="${formModel}と書けばオブジェクト名が変わった時に中身の修正が必要ない -->
+<form method="post" action="/db/basic/test/" th:object="${formModel}">
+	名前<input type="text" name="name" th:value="*{name}">
+	<button type="submit">登録</button>
+</form>
+<hr>
 <!-- th:inlineをつけると中での表示形式を省略できる -->
 <table th:inline="text" border="1">
 	<thead>

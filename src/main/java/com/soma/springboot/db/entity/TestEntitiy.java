@@ -22,7 +22,7 @@ public class TestEntitiy {
 	// Primary Key
 	@Id
 	// AutoIncrement
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	

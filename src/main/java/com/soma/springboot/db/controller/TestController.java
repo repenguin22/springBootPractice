@@ -1,11 +1,11 @@
 package com.soma.springboot.db.controller;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.soma.springboot.db.entity.TestEntitiy;
@@ -17,9 +17,9 @@ public class TestController {
 	// リポジトリに関連づけを行う
 	@Autowired
 	TestRepository testRepository;
-
-	@RequestMapping(value="/db/basic/test/")
-	public ModelAndView send(@RequestParam Map<String, String> param, ModelAndView mav) {
+	
+	@RequestMapping(value="/db/basic/test/", method=RequestMethod.GET)
+	public ModelAndView send(@ModelAttribute("formModel") TestEntitiy testEntitiy, ModelAndView mav) {
 		
 		// DBデータを取得
 		// findAllで全件取得する
@@ -30,5 +30,14 @@ public class TestController {
 		mav.addObject("data", resultList);
 		// ページを返却
 		return mav;
+	}
+	
+	@RequestMapping(value="/db/basic/test/", method=RequestMethod.POST)
+	@Transactional(readOnly=false)
+	public ModelAndView insert(@ModelAttribute("formModel") TestEntitiy testEntitiy, ModelAndView mav) {
+		// 引数にhtmlのformにセットした"formModel"を持ってきている
+		// insert
+		testRepository.saveAndFlush(testEntitiy);
+		return new ModelAndView("redirect:/db/basic/test/");
 	}
 }
