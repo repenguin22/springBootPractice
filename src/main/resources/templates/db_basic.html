@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>DB basic Entity-Repository</h1>
+<!-- th:inlineをつけると中での表示形式を省略できる -->
+<table th:inline="text" border="1">
+	<thead>
+		<tr>
+			<td>ID</td>
+			<td>name</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="obj : ${data}">
+			<td>[[${obj.id}]]</td>
+			<td>[[${obj.name}]]</td>
+		</tr>
+	</tbody>
+</table>
+</body>
+</html>

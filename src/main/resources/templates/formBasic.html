@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <h1>Form</h1>
+<h2>現在時:</h2>
+<p>javaを実行する</p>
+<h2 th:text="${{#dates.format(new java.util.Date(), 'dd/MMM/yyyy HH:mm')}}"></h2>
+<p>プロパティファイルの値を呼び出す</p>
+<p th:text="#{foo.message}"></p>
+<p>リテラル置換</p>
+<p th:text="|my suitcase is gone #{foo.message}|"></p>
 <p th:text="${msg}"></p>
 <form method="post" action="/basic/form/basic">
 	名前<input type="text" name="name" value="">
